@@ -8,8 +8,8 @@
 
     <kmitl.lab03.armhansa58070159.simplemydot.view.DotView
         android:id="@+id/dotView"
-        android:layout_width="53dp"
-        android:layout_height="495dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_weight="10"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp" />
