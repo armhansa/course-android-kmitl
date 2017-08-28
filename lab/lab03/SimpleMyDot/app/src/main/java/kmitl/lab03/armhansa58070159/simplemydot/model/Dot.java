@@ -13,20 +13,20 @@ public class Dot {
 
     private DotChangedListener dotChangedListener;
 
-    private int centerX;
-    private int centerY;
+    private float centerX;
+    private float centerY;
     private int radius;
 
     private int red;
     private int green;
     private int blue;
 
-    public Dot(DotChangedListener dotChangedListener, int centerX, int centerY) {
+    public Dot(DotChangedListener dotChangedListener, float centerX, float centerY, int radius) {
         this.dotChangedListener = dotChangedListener;
         Random random = new Random();
         this.centerX = centerX;
         this.centerY = centerY;
-        this.radius = 40;
+        this.radius = radius;
         this.red = random.nextInt(255);
         this.green = random.nextInt(255);
         this.blue = random.nextInt(255);
@@ -34,11 +34,11 @@ public class Dot {
         this.dotChangedListener.onDotChanged(this);
     }
 
-    public int getCenterX() {
+    public float getCenterX() {
         return centerX;
     }
 
-    public int getCenterY() {
+    public float getCenterY() {
         return centerY;
     }
 
