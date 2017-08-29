@@ -22,6 +22,7 @@ implements Dot.DotChangedListener{
         float touchX = event.getX();
         float touchY = event.getY()-300;
 
+        if(event.getAction() == MotionEvent.ACTION_DOWN)
         new Dot(this, touchX, touchY, 50);
 
         return super.onTouchEvent(event);
