@@ -20,7 +20,7 @@ implements Dot.DotChangedListener{
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float touchX = event.getX();
-        float touchY = event.getY()-300;
+        float touchY = event.getY()-200;
 
         if(event.getAction() == MotionEvent.ACTION_DOWN)
         new Dot(this, touchX, touchY, 50);

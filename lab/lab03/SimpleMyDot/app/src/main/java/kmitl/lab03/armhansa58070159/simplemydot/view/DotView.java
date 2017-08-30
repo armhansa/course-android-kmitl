@@ -14,53 +14,47 @@ import java.util.List;
 import java.util.Random;
 
 import kmitl.lab03.armhansa58070159.simplemydot.model.Dot;
+import kmitl.lab03.armhansa58070159.simplemydot.model.ListDot;
 
 public class DotView extends View {
 
     private Paint paint;
-    private List<Dot> dot = new ArrayList<>();
-    private Random random = new Random();
+
+    private ListDot dots;
 
     public void setDot(Dot dot) {
-        this.dot.add(dot);
+        dots.getDots().add(dot);
     }
 
     public void clearDot() {
-        dot.clear();
+        dots.getDots().clear();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        for(int i=0; i<dot.size(); i++) {
-            paint.setColor(Color.rgb(dot.get(i).getRed(), dot.get(i).getGreen(), dot.get(i).getBlue()));
-            canvas.drawCircle(dot.get(i).getCenterX(),
-                    dot.get(i).getCenterY(),
-                    dot.get(i).getRadius(),
-            paint);
+        for (Dot i: dots.getDots()) {
+            paint.setColor(Color.rgb(i.getRed(), i.getGreen(), i.getBlue()));
+            canvas.drawCircle(i.getCenterX(), i.getCenterY(), i.getRadius(), paint);
         }
-//        if(dot != null) {
-//            paint.setColor(Color.RED);
-//            canvas.drawCircle(dot.getCenterX(),
-//                    dot.getCenterY(),
-//                    dot.getRadius(),
-//                    paint);
-//        }
     }
 
     public DotView(Context context) {
         super(context);
         paint = new Paint();
+        dots = new ListDot();
     }
 
     public DotView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();
+        dots = new ListDot();
     }
 
     public DotView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         paint = new Paint();
+        dots = new ListDot();
     }
 
 }
