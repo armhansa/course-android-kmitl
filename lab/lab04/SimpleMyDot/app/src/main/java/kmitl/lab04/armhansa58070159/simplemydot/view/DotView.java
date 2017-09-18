@@ -28,28 +28,31 @@ public class DotView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        for (Dot i: dots.getDots()) {
-            paint.setColor(Color.rgb(i.getRed(), i.getGreen(), i.getBlue()));
-            canvas.drawCircle(i.getCenterX(), i.getCenterY(), i.getRadius(), paint);
+        if(dots != null) {
+            for (Dot i : dots.getDots()) {
+                paint.setColor(Color.rgb(i.getRed(), i.getGreen(), i.getBlue()));
+                canvas.drawCircle(i.getCenterX(), i.getCenterY(), i.getRadius(), paint);
+            }
         }
     }
 
     public DotView(Context context) {
         super(context);
         paint = new Paint();
-        dots = new ListDot();
     }
 
     public DotView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();
-        dots = new ListDot();
     }
 
     public DotView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         paint = new Paint();
-        dots = new ListDot();
+    }
+
+    public void setDots(ListDot dots) {
+        this.dots = dots;
     }
 
 }

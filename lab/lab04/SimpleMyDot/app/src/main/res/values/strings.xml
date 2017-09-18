@@ -2,4 +2,5 @@
     <string name="app_name">SimpleMyDot</string>
     <string name="random">Random</string>
     <string name="reset">Reset</string>
+    <string name="share">Share</string>
 </resources>

@@ -23,9 +23,9 @@ public class Dot {
         this.centerX = centerX;
         this.centerY = centerY;
         this.radius = radius;
-        this.red = random.nextInt(255);
-        this.green = random.nextInt(255);
-        this.blue = random.nextInt(255);
+        this.red = 100+random.nextInt(155);
+        this.green = 100+random.nextInt(155);
+        this.blue = 100+random.nextInt(155);
 
         this.dotChangedListener.onDotChanged(this);
     }

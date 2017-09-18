@@ -57,7 +57,7 @@
         android:onClick="onClickShare"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Share"
+        android:text="@string/share"
         android:background="#FFCCCC"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
