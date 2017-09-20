@@ -8,13 +8,14 @@ public class ListDot {
     }
 
     private DotsChangedListener dotsChangedListener;
+
     private ArrayList<Dot> dots;
 
     public ListDot() { dots = new ArrayList<>(); }
 
     public ListDot(DotsChangedListener dotsChangedListener) {
-        dots = new ArrayList<>();
         this.dotsChangedListener = dotsChangedListener;
+        dots = new ArrayList<>();
     }
 
     public ArrayList<Dot> getDots() {
@@ -32,6 +33,10 @@ public class ListDot {
             }
         }
         return -1;
+    }
+
+    public void addDot(Dot dot) {
+        this.dots.add(dot);
     }
 
     public void removeDot(int index) {

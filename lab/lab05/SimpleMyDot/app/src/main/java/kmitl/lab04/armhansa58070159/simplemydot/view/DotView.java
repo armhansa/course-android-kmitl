@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import kmitl.lab04.armhansa58070159.simplemydot.model.Dot;
@@ -13,14 +14,29 @@ import kmitl.lab04.armhansa58070159.simplemydot.model.ListDot;
 
 public class DotView extends View {
 
+    public interface OnDotViewPressedListener {
+        void dotViewPressed(int x, int y);
+    }
+
+    private OnDotViewPressedListener onDotViewPressedListener;
+
+    public void setOnDotViewPressedListener(
+            OnDotViewPressedListener onDotViewPressedListener) {
+        this.onDotViewPressedListener = onDotViewPressedListener;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        this.onDotViewPressedListener.dotViewPressed((int) event.getX(), (int) event.getY());
+
+        return super.onTouchEvent(event);
+    }
+
     private Paint paint;
-
     private ListDot dots;
-
     public void setDot(Dot dot) {
         dots.getDots().add(dot);
     }
-
     public void clearDot() {
         dots.getDots().clear();
     }

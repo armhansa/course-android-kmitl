@@ -3,12 +3,6 @@ package kmitl.lab04.armhansa58070159.simplemydot.model;
 import java.util.Random;
 
 public class Dot {
-    public interface DotChangedListener {
-        void onDotChanged(Dot dot);
-    }
-
-    private DotChangedListener dotChangedListener;
-
     private float centerX;
     private float centerY;
     private int radius;
@@ -17,8 +11,7 @@ public class Dot {
     private int green;
     private int blue;
 
-    public Dot(DotChangedListener dotChangedListener, float centerX, float centerY, int radius) {
-        this.dotChangedListener = dotChangedListener;
+    public Dot(float centerX, float centerY, int radius) {
         Random random = new Random();
         this.centerX = centerX;
         this.centerY = centerY;
@@ -27,7 +20,6 @@ public class Dot {
         this.green = 100+random.nextInt(155);
         this.blue = 100+random.nextInt(155);
 
-        this.dotChangedListener.onDotChanged(this);
     }
 
     public float getCenterX() {

@@ -3,22 +3,26 @@ package kmitl.lab04.armhansa58070159.simplemydot.model;
 import java.util.ArrayList;
 
 public class ListDot {
-    public interface DotsChangedListener {
+    public interface OnDotsChangedListener {
         void onDotsChangedListener(ListDot dots);
     }
 
-    private DotsChangedListener dotsChangedListener;
+    private OnDotsChangedListener onDotsChangedListener;
     private ArrayList<Dot> dots;
 
     public ListDot() { dots = new ArrayList<>(); }
 
-    public ListDot(DotsChangedListener dotsChangedListener) {
+    public ListDot(OnDotsChangedListener dotsChangedListener) {
         dots = new ArrayList<>();
-        this.dotsChangedListener = dotsChangedListener;
+        this.onDotsChangedListener = dotsChangedListener;
     }
 
     public ArrayList<Dot> getDots() {
         return dots;
+    }
+
+    public void addDot() {
+        this.dots.add(new Dot())
     }
 
     public int findDotPressed(int centerX, int centerY) {

@@ -27,7 +27,7 @@ import kmitl.lab04.armhansa58070159.simplemydot.model.ListDot;
 import kmitl.lab04.armhansa58070159.simplemydot.view.DotView;
 
 public class MainActivity extends AppCompatActivity
-implements Dot.DotChangedListener{
+implements ListDot.DotsChangedListener{
 
     private DotView dotView;
     private ListDot dots;
@@ -50,7 +50,7 @@ implements Dot.DotChangedListener{
                     case MotionEvent.ACTION_DOWN :
                         int index = dots.findDotPressed(touchX, touchY);
                         if(index == -1) {
-                            new Dot(MainActivity.this, touchX, touchY, 50);
+                            dots.addDot(new Dot(touchX, touchY, 50));
                         } else {
                             dots.removeDot(index);
                             dotView.invalidate();
@@ -71,13 +71,12 @@ implements Dot.DotChangedListener{
 
 
 
-
     public void onClickRandomDot(View view) {
         // Random a Dot
         Random random = new Random();
         int centerX = random.nextInt(this.dotView.getWidth());
         int centerY = random.nextInt(this.dotView.getHeight());
-        new Dot(this, centerX, centerY, 40);
+        dots.addDot(new Dot(centerX, centerY, 40));
     }
 
     public void onClickResetDot(View view) {
@@ -85,12 +84,13 @@ implements Dot.DotChangedListener{
         dotView.invalidate();
     }
 
-    @Override
-    public void onDotChanged(Dot dot) {
-        // Draw dot model to view
-        dotView.setDot(dot);
-        dotView.invalidate();
-    }
+//    @Override
+//    public void onDotChanged(Dot dot) {
+//        // Draw dot model to view
+//        dotView.setDot(dot);
+//        dotView.invalidate();
+//    }
+
 
 
     public void onClickShare(View view) {
@@ -109,5 +109,10 @@ implements Dot.DotChangedListener{
         Uri imageUri = Uri.parse(path);
         share.putExtra(Intent.EXTRA_STREAM, imageUri);
         startActivity(Intent.createChooser(share, "Select"));
+    }
+
+    @Override
+    public void onDotsChangedListener(ListDot dots) {
+        dotView.invalidate();
     }
 }

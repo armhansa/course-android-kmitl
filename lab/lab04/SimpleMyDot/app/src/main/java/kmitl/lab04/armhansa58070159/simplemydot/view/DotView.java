@@ -11,7 +11,8 @@ import android.view.View;
 import kmitl.lab04.armhansa58070159.simplemydot.model.Dot;
 import kmitl.lab04.armhansa58070159.simplemydot.model.ListDot;
 
-public class DotView extends View {
+public class
+DotView extends View {
 
     private Paint paint;
 
