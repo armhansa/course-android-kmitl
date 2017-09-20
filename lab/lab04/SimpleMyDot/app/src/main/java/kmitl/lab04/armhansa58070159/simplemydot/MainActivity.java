@@ -27,7 +27,7 @@ import kmitl.lab04.armhansa58070159.simplemydot.model.ListDot;
 import kmitl.lab04.armhansa58070159.simplemydot.view.DotView;
 
 public class MainActivity extends AppCompatActivity
-implements ListDot.DotsChangedListener{
+implements ListDot.DotsChangedListener, DotView.OnDotViewPressedListener{
 
     private DotView dotView;
     private ListDot dots;
@@ -40,27 +40,7 @@ implements ListDot.DotsChangedListener{
         dots = new ListDot();
 
         dotView = (DotView) findViewById(R.id.dotView);
-        dotView.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                int touchX = (int) event.getX();
-                int touchY = (int) event.getY();
-                switch(event.getAction()) {
-                    case MotionEvent.ACTION_DOWN :
-                        int index = dots.findDotPressed(touchX, touchY);
-                        if(index == -1) {
-                            dots.addDot(new Dot(touchX, touchY, 50));
-                        } else {
-                            dots.removeDot(index);
-                            dotView.invalidate();
-                        }
-                }
-
-                return false;
-            }
-        });
-
+        dotView.setOnDotViewPressedListener(this);
         dotView.setDots(dots);
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -77,6 +57,7 @@ implements ListDot.DotsChangedListener{
         int centerX = random.nextInt(this.dotView.getWidth());
         int centerY = random.nextInt(this.dotView.getHeight());
         dots.addDot(new Dot(centerX, centerY, 40));
+        dotView.invalidate();
     }
 
     public void onClickResetDot(View view) {
@@ -113,6 +94,17 @@ implements ListDot.DotsChangedListener{
 
     @Override
     public void onDotsChangedListener(ListDot dots) {
+        dotView.invalidate();
+    }
+
+    @Override
+    public void onDotViewPressed(int touchX, int touchY) {
+        int index = dots.findDotPressed(touchX, touchY);
+        if(index == -1) {
+            dots.addDot(new Dot(touchX, touchY, 50));
+        } else {
+            dots.removeDot(index);
+        }
         dotView.invalidate();
     }
 }
