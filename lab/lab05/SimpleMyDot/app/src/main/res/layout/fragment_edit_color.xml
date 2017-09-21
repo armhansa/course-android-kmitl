@@ -159,15 +159,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/textView5" />
 
-    <SeekBar
-        android:id="@+id/seekBar2"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:layout_width="156dp"
-        android:layout_height="27dp"
-        android:max="10"
-        android:progress="3"
-        android:verticalScrollbarPosition="right"
-        tools:layout_editor_absoluteX="83dp"
-        tools:layout_editor_absoluteY="38dp" />
-
 </android.support.constraint.ConstraintLayout>
