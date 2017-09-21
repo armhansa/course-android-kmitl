@@ -22,6 +22,13 @@ public class Dot {
 
     }
 
+    public void changeColor() {
+        Random random = new Random();
+        this.red = 100+random.nextInt(155);
+        this.green = 100+random.nextInt(155);
+        this.blue = 100+random.nextInt(155);
+    }
+
     public float getCenterX() {
         return centerX;
     }

@@ -105,8 +105,8 @@ implements ListDot.DotsChangedListener, DotView.OnDotViewPressedListener{
     public void onDotViewLongPressed(int touchX, int touchY) {
         int index = dots.findDotPressed(touchX, touchY);
 
-        if(index == -1) {
-
+        if(index != -1) {
+            dots.getDots().get(index).changeColor();
         } else {
             Log.wtf("", "LongPress");
         }

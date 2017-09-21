@@ -6,37 +6,37 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
 import kmitl.lab04.armhansa58070159.simplemydot.model.Dot;
 import kmitl.lab04.armhansa58070159.simplemydot.model.ListDot;
 
-public class DotView extends View {
+public class
+DotView extends View {
 
     public interface OnDotViewPressedListener {
-        void dotViewPressed(int x, int y);
+        void onDotViewPressed(int touchX, int touchY);
+        void onDotViewLongPressed(int touchX, int touchY);
     }
 
-    private OnDotViewPressedListener onDotViewPressedListener;
+    OnDotViewPressedListener onDotViewPressedListener;
 
     public void setOnDotViewPressedListener(
             OnDotViewPressedListener onDotViewPressedListener) {
         this.onDotViewPressedListener = onDotViewPressedListener;
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        this.onDotViewPressedListener.dotViewPressed((int) event.getX(), (int) event.getY());
-
-        return super.onTouchEvent(event);
-    }
-
     private Paint paint;
+
     private ListDot dots;
+
     public void setDot(Dot dot) {
         dots.getDots().add(dot);
     }
+
     public void clearDot() {
         dots.getDots().clear();
     }
@@ -50,6 +50,28 @@ public class DotView extends View {
                 canvas.drawCircle(i.getCenterX(), i.getCenterY(), i.getRadius(), paint);
             }
         }
+    }
+
+    public GestureDetector gestureDetector = new GestureDetector(new GestureDetector.SimpleOnGestureListener() {
+        public void onLongPress(MotionEvent e) {
+            DotView.this.onDotViewPressedListener.onDotViewLongPressed((int) e.getX(), (int) e.getY());
+        }
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            DotView.this.onDotViewPressedListener.onDotViewPressed((int) e.getX(), (int) e.getY());
+            return super.onSingleTapUp(e);
+        }
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return true;
+        }
+    });
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return gestureDetector.onTouchEvent(event);
     }
 
     public DotView(Context context) {

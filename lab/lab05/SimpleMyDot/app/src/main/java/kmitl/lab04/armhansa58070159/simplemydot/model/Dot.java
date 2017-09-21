@@ -3,7 +3,6 @@ package kmitl.lab04.armhansa58070159.simplemydot.model;
 import java.util.Random;
 
 public class Dot {
-
     private float centerX;
     private float centerY;
     private int radius;
