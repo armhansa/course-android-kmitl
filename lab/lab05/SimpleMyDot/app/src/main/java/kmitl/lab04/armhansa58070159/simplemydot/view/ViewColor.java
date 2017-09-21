@@ -25,7 +25,7 @@ public class ViewColor extends View {
         super.onDraw(canvas);
         if(dot != null) {
             paint.setColor(Color.rgb(dot.getRed(), dot.getGreen(), dot.getBlue()));
-            canvas.drawCircle(0, 0, 40, paint);
+            canvas.drawCircle(100, 100, 50, paint);
         }
     }
 

@@ -131,7 +131,7 @@ implements ListDot.DotsChangedListener, DotView.OnDotViewPressedListener{
         int index = dots.findDotPressed(touchX, touchY);
 
         if(index != -1) {
-            dots.getDots().get(index).changeColor();
+            //dots.getDots().get(index).changeColor();
             FragmentManager fragmentManager = getFragmentManager();
 
             if(editColorFragment != null)
