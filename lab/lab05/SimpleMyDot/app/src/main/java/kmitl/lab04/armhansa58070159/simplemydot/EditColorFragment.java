@@ -56,12 +56,16 @@ implements SeekBar.OnSeekBarChangeListener {
         View rootView = inflater.inflate(R.layout.fragment_edit_color, container, false);
 
         seekBarRed = rootView.findViewById(R.id.seekBar6);
+        seekBarRed.setProgress(dot.getRed());
         seekBarRed.setOnSeekBarChangeListener(this);
         seekBarGreen = rootView.findViewById(R.id.seekBar7);
+        seekBarGreen.setProgress(dot.getGreen());
         seekBarGreen.setOnSeekBarChangeListener(this);
         seekBarBlue = rootView.findViewById(R.id.seekBar5);
+        seekBarBlue.setProgress(dot.getBlue());
         seekBarBlue.setOnSeekBarChangeListener(this);
         seekBarSize = rootView.findViewById(R.id.seekBar);
+        seekBarSize.setProgress(dot.getRadius());
         seekBarSize.setOnSeekBarChangeListener(this);
         exitEdit = rootView.findViewById(R.id.exitEdit);
         exitEdit.setOnClickListener(new View.OnClickListener() {

@@ -153,6 +153,7 @@ implements ListDot.DotsChangedListener, DotView.OnDotViewPressedListener
     @Override
     public void onDotChangedListener(Dot dot, int index) {
         this.dots.getDots().get(index).setColor(dot.getRed(), dot.getGreen(), dot.getBlue());
+        this.dots.getDots().get(index).setSize(dot.getRadius());
         dotView.invalidate();
         Log.wtf("", "ColorChange");
     }
