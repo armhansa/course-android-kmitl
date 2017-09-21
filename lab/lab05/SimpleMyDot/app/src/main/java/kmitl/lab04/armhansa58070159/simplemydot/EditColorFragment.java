@@ -41,6 +41,8 @@ implements SeekBar.OnSeekBarChangeListener {
     private SeekBar seekBarGreen;
     private SeekBar seekBarBlue;
     private SeekBar seekBarSize;
+    private SeekBar seekBarX;
+    private SeekBar seekBarY;
 
     private Dot dot;
     private int index;
@@ -60,15 +62,27 @@ implements SeekBar.OnSeekBarChangeListener {
         seekBarRed = rootView.findViewById(R.id.seekBar6);
         seekBarRed.setProgress(dot.getRed());
         seekBarRed.setOnSeekBarChangeListener(this);
+
         seekBarGreen = rootView.findViewById(R.id.seekBar7);
         seekBarGreen.setProgress(dot.getGreen());
         seekBarGreen.setOnSeekBarChangeListener(this);
+
         seekBarBlue = rootView.findViewById(R.id.seekBar5);
         seekBarBlue.setProgress(dot.getBlue());
         seekBarBlue.setOnSeekBarChangeListener(this);
+
         seekBarSize = rootView.findViewById(R.id.seekBar);
         seekBarSize.setProgress(dot.getRadius());
         seekBarSize.setOnSeekBarChangeListener(this);
+
+        seekBarX = rootView.findViewById(R.id.seekBar3);
+        seekBarX.setProgress((int) dot.getCenterX());
+        seekBarX.setOnSeekBarChangeListener(this);
+
+        seekBarY = rootView.findViewById(R.id.seekBar4);
+        seekBarY.setProgress((int) dot.getCenterY());
+        seekBarY.setOnSeekBarChangeListener(this);
+
         exitEdit = rootView.findViewById(R.id.exitEdit);
         exitEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,8 +125,12 @@ implements SeekBar.OnSeekBarChangeListener {
             this.dot.setRed(i);
         } else if(seekBar == seekBarGreen) {
             this.dot.setGreen(i);
-        } else {
+        } else if(seekBar == seekBarBlue){
             this.dot.setBlue(i);
+        } else if(seekBar == seekBarX) {
+            this.dot.setCenterX(i);
+        } else {
+            this.dot.setCenterY(i);
         }
         viewColor.invalidate();
         onDotChangedListener.onDotChangedListener(this.dot, index);

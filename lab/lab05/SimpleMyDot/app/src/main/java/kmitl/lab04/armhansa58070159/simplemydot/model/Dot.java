@@ -110,6 +110,11 @@ public class Dot implements Parcelable{
         this.blue = blue;
     }
 
+    public void setCenterX(float centerX) { this.centerX = centerX; }
+
+    public void setCenterY(float centerY) { this.centerY = centerY; }
+
+
     public void setSize(int size) {
         this.radius = size;
     }
