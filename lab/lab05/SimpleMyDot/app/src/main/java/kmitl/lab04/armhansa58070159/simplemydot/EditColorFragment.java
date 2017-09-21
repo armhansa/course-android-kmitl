@@ -55,6 +55,8 @@ implements SeekBar.OnSeekBarChangeListener {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_edit_color, container, false);
 
+        dot = getArguments().getParcelable("dot");
+
         seekBarRed = rootView.findViewById(R.id.seekBar6);
         seekBarRed.setProgress(dot.getRed());
         seekBarRed.setOnSeekBarChangeListener(this);
@@ -75,7 +77,7 @@ implements SeekBar.OnSeekBarChangeListener {
             }
         });
 
-        dot = getArguments().getParcelable("dot");
+
         index = getArguments().getInt("index");
         viewColor = rootView.findViewById(R.id.viewColor);
         viewColor.setDot(dot);
