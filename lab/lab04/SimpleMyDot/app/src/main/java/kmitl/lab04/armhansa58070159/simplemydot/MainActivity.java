@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -65,15 +66,6 @@ implements ListDot.DotsChangedListener, DotView.OnDotViewPressedListener{
         dotView.invalidate();
     }
 
-//    @Override
-//    public void onDotChanged(Dot dot) {
-//        // Draw dot model to view
-//        dotView.setDot(dot);
-//        dotView.invalidate();
-//    }
-
-
-
     public void onClickShare(View view) {
         View rootView = getWindow().getDecorView().getRootView();
         rootView.setDrawingCacheEnabled(true);
@@ -100,10 +92,23 @@ implements ListDot.DotsChangedListener, DotView.OnDotViewPressedListener{
     @Override
     public void onDotViewPressed(int touchX, int touchY) {
         int index = dots.findDotPressed(touchX, touchY);
+        Log.wtf("", "Up");
         if(index == -1) {
             dots.addDot(new Dot(touchX, touchY, 50));
         } else {
             dots.removeDot(index);
+        }
+        dotView.invalidate();
+    }
+
+    @Override
+    public void onDotViewLongPressed(int touchX, int touchY) {
+        int index = dots.findDotPressed(touchX, touchY);
+
+        if(index == -1) {
+
+        } else {
+            Log.wtf("", "LongPress");
         }
         dotView.invalidate();
     }

@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -17,6 +19,7 @@ DotView extends View {
 
     public interface OnDotViewPressedListener {
         void onDotViewPressed(int touchX, int touchY);
+        void onDotViewLongPressed(int touchX, int touchY);
     }
 
     OnDotViewPressedListener onDotViewPressedListener;
@@ -49,11 +52,26 @@ DotView extends View {
         }
     }
 
+    public GestureDetector gestureDetector = new GestureDetector(new GestureDetector.SimpleOnGestureListener() {
+        public void onLongPress(MotionEvent e) {
+            DotView.this.onDotViewPressedListener.onDotViewLongPressed((int) e.getX(), (int) e.getY());
+        }
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+            DotView.this.onDotViewPressedListener.onDotViewPressed((int) e.getX(), (int) e.getY());
+            return super.onSingleTapUp(e);
+        }
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return true;
+        }
+    });
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(event.getAction() == MotionEvent.ACTION_DOWN)
-            onDotViewPressedListener.onDotViewPressed((int) event.getX(), (int) event.getY());
-        return super.onTouchEvent(event);
+        return gestureDetector.onTouchEvent(event);
     }
 
     public DotView(Context context) {
