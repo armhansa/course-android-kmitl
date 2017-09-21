@@ -4,10 +4,12 @@ package kmitl.lab04.armhansa58070159.simplemydot;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -22,7 +24,7 @@ public class EditColorFragment extends Fragment
 implements SeekBar.OnSeekBarChangeListener {
 
     public interface OnDotChangedListener {
-        void onDotChangedListener(Dot dot);
+        void onDotChangedListener(Dot dot, int index);
     }
 
     OnDotChangedListener onDotChangedListener;
@@ -34,11 +36,14 @@ implements SeekBar.OnSeekBarChangeListener {
 
     ViewColor viewColor;
 
-    SeekBar seekBarRed;
-    SeekBar seekBarGreen;
-    SeekBar seekBarBlue;
+    private Button exitEdit;
+    private SeekBar seekBarRed;
+    private SeekBar seekBarGreen;
+    private SeekBar seekBarBlue;
+    private SeekBar seekBarSize;
 
-    Dot dot;
+    private Dot dot;
+    private int index;
 
     public EditColorFragment() {
         // Required empty public constructor
@@ -56,50 +61,60 @@ implements SeekBar.OnSeekBarChangeListener {
         seekBarGreen.setOnSeekBarChangeListener(this);
         seekBarBlue = rootView.findViewById(R.id.seekBar5);
         seekBarBlue.setOnSeekBarChangeListener(this);
+        seekBarSize = rootView.findViewById(R.id.seekBar);
+        seekBarSize.setOnSeekBarChangeListener(this);
+        exitEdit = rootView.findViewById(R.id.exitEdit);
+        exitEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickExit();
+            }
+        });
 
         dot = getArguments().getParcelable("dot");
+        index = getArguments().getInt("index");
         viewColor = rootView.findViewById(R.id.viewColor);
         viewColor.setDot(dot);
-        // dot.changeColor();
+
 
         return rootView;
     }
 
+    public void onClickExit() {
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .remove(this)
+                .commit();
+    }
 
-    public static EditColorFragment newInstance(Dot dot) {
+    public static EditColorFragment newInstance(Dot dot, int index) {
         Bundle args = new Bundle();
 
         EditColorFragment fragment = new EditColorFragment();
         args.putParcelable("dot", dot);
+        args.putInt("index", index);
         fragment.setArguments(args);
-
         return fragment;
     }
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-        if(seekBar == seekBarRed) {
-            Log.wtf("", "R1"+i);
-            dot.setRed(i);
-
+        if(seekBar == seekBarSize) {
+            this.dot.setSize(i);
+        } else if(seekBar == seekBarRed) {
+            this.dot.setRed(i);
         } else if(seekBar == seekBarGreen) {
-            Log.wtf("", "G1"+i);
-            dot.setGreen(i);
+            this.dot.setGreen(i);
         } else {
-            Log.wtf("", "B1"+i);
-            dot.setBlue(i);
+            this.dot.setBlue(i);
         }
         viewColor.invalidate();
+        onDotChangedListener.onDotChangedListener(this.dot, index);
     }
 
     @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-        Log.wtf("", "2");
-    }
+    public void onStartTrackingTouch(SeekBar seekBar) { }
 
     @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-        Log.wtf("", "3");
-    }
+    public void onStopTrackingTouch(SeekBar seekBar) { }
 }

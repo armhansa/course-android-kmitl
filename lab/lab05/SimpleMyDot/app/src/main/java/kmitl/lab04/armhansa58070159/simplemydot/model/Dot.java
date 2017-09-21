@@ -92,6 +92,12 @@ public class Dot implements Parcelable{
         parcel.writeInt(blue);
     }
 
+    public void setColor(int red, int green, int blue) {
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
+    }
+
     public void setRed(int red) {
         this.red = red;
     }
@@ -102,5 +108,9 @@ public class Dot implements Parcelable{
 
     public void setBlue(int blue) {
         this.blue = blue;
+    }
+
+    public void setSize(int size) {
+        this.radius = size;
     }
 }

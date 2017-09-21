@@ -25,7 +25,8 @@ import kmitl.lab04.armhansa58070159.simplemydot.model.ListDot;
 import kmitl.lab04.armhansa58070159.simplemydot.view.DotView;
 
 public class MainFragment extends Fragment
-implements ListDot.DotsChangedListener, DotView.OnDotViewPressedListener{
+implements ListDot.DotsChangedListener, DotView.OnDotViewPressedListener
+, EditColorFragment.OnDotChangedListener{
 
     private DotView dotView;
     private ListDot dots;
@@ -138,7 +139,8 @@ implements ListDot.DotsChangedListener, DotView.OnDotViewPressedListener{
                 fragmentManager.beginTransaction()
                         .remove(editColorFragment)
                         .commit();
-            editColorFragment = new EditColorFragment().newInstance(dots.getDots().get(index));
+            editColorFragment = new EditColorFragment().newInstance(dots.getDots().get(index), index);
+            editColorFragment.setOnDotChangedListener(this);
             fragmentManager.beginTransaction()
                     .add(R.id.mainFragment, editColorFragment)
                     .commit();
@@ -148,4 +150,10 @@ implements ListDot.DotsChangedListener, DotView.OnDotViewPressedListener{
         }
     }
 
+    @Override
+    public void onDotChangedListener(Dot dot, int index) {
+        this.dots.getDots().get(index).setColor(dot.getRed(), dot.getGreen(), dot.getBlue());
+        dotView.invalidate();
+        Log.wtf("", "ColorChange");
+    }
 }
