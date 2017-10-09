@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import kmitl.armhansa.test.app.lazyinstagram.R;
+import kmitl.armhansa.test.app.lazyinstagram.model.Image;
 
 class Holder extends RecyclerView.ViewHolder {
 
@@ -29,12 +30,7 @@ public class PostAdapter extends RecyclerView.Adapter<Holder> {
         this.context = context;
     }
 
-    private String data[] = {
-            "http://api.learn2crack.com/android/images/donut.png",
-            "http://api.learn2crack.com/android/images/eclair.png",
-            "http://api.learn2crack.com/android/images/froyo.png",
-            "http://api.learn2crack.com/android/images/ginger.png"
-    };
+    private Image data[];
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -48,12 +44,16 @@ public class PostAdapter extends RecyclerView.Adapter<Holder> {
     @Override
     public void onBindViewHolder(Holder holder, int position) {
         ImageView image = holder.image;
-        Glide.with(context).load(data[position]).into(image);
+        Glide.with(context).load(data[position].getUrl()).into(image);
 
     }
 
     @Override
     public int getItemCount() {
         return data.length;
+    }
+
+    public void setData(Image data[]) {
+        this.data = data;
     }
 }

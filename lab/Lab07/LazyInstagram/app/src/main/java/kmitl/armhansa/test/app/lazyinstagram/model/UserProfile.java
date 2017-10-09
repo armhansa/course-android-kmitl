@@ -1,5 +1,13 @@
 package kmitl.armhansa.test.app.lazyinstagram.model;
 
+import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
+import kmitl.armhansa.test.app.lazyinstagram.MainActivity;
+import kmitl.armhansa.test.app.lazyinstagram.R;
+import kmitl.armhansa.test.app.lazyinstagram.adapter.PostAdapter;
+
 public class UserProfile {
 
     private String user;
@@ -9,6 +17,11 @@ public class UserProfile {
     private int following;
     private boolean isFollow;
     private int post;
+
+    public UserProfile() {
+    }
+
+    private Image posts[];
 
     public String getUser() {
         return user;
@@ -66,4 +79,19 @@ public class UserProfile {
         this.post = post;
     }
 
+    public Image[] getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Image[] posts) {
+        this.posts = posts;
+    }
+
+    public void toImagePosts(MainActivity mainActivity) {
+        PostAdapter postAdapter = new PostAdapter(mainActivity);
+        postAdapter.setData(posts);
+        RecyclerView recyclerView = mainActivity.findViewById(R.id.list);
+        recyclerView.setLayoutManager(new GridLayoutManager(mainActivity, 3));
+        recyclerView.setAdapter(postAdapter);
+    }
 }

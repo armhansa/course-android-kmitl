@@ -26,12 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getUserProfile("nature");
-
-        PostAdapter postAdapter = new PostAdapter(this);
-        RecyclerView recyclerView = findViewById(R.id.list);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        recyclerView.setAdapter(postAdapter);
+        getUserProfile("android");
 
     }
 
@@ -50,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 retrofit.create(InstagramApi.class);
         Call<UserProfile> call = instagramApi.getProfile(username);
         call.enqueue(new Callback<UserProfile>() {
-
+            private UserProfile userProfile;
             private TextView user;
             private ImageView profileImage;
             private TextView bio;
@@ -61,9 +56,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
                 if(response.isSuccessful()) {
-                    UserProfile userProfile = response.body();
+                    userProfile = response.body();
                     setValue();
-                    setIntoView(userProfile);
+                    setIntoView();
+                    userProfile.toImagePosts(MainActivity.this);
 
                 }
             }
@@ -82,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 following = findViewById(R.id.txtFollowing);
             }
 
-            private void setIntoView(UserProfile userProfile) {
+            private void setIntoView() {
                 user.setText("   "+userProfile.getUser());
                 Glide.with(MainActivity.this)
                         .load(userProfile.getUrlProfile()).into(profileImage);
@@ -92,8 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 following.setText("Following\n" + userProfile.getFollowing());
 
             }
-
-
         });
     }
 }
