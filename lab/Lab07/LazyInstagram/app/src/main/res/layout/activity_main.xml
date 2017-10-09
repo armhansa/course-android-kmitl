@@ -47,7 +47,7 @@
                     android:text="   username"
                     android:layout_weight="1.2"
                     android:layout_gravity="center_vertical"
-                    android:textSize="22sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -56,29 +56,86 @@
                     android:layout_weight="2"
                     android:weightSum="3">
 
-                    <TextView
-                        android:id="@+id/txtPost"
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:orientation="vertical"
                         android:layout_weight="1"
-                        android:text="Post\n-"
-                        android:gravity="center"/>
+                        android:weightSum="3">
 
-                    <TextView
-                        android:id="@+id/txtFollowing"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="Following\n-"
-                        android:gravity="center" />
+                        <TextView
+                            android:id="@+id/txtPost"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:text="-"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:gravity="center" />
 
-                    <TextView
-                        android:id="@+id/txtFollower"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Post"
+                            android:textSize="12sp"
+                            android:gravity="center"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:orientation="vertical"
                         android:layout_weight="1"
-                        android:text="Follower\n-"
-                        android:gravity="center" />
+                        android:weightSum="3" >
+
+                        <TextView
+                            android:id="@+id/txtFollowing"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:text="-"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Following"
+                            android:textSize="12sp"
+                            android:gravity="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:weightSum="3" >
+
+                        <TextView
+                            android:id="@+id/txtFollower"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:text="-"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:gravity="center" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Follower"
+                            android:textSize="12sp"
+                            android:gravity="center" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -100,12 +157,13 @@
 
                 </ScrollView>
 
-
             </LinearLayout>
 
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnFollow"
+            android:onClick="tmpSwitchUser"
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:background="#55CC55"
@@ -120,7 +178,6 @@
             app:layout_constraintLeft_toLeftOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
-
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list"

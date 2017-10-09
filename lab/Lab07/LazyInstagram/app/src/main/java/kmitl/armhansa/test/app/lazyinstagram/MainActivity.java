@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,12 +22,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+    private String user[] = {"android", "cartoon", "nature"};
+    private int pointer = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getUserProfile("android");
+        getUserProfile(user[pointer]);
 
     }
 
@@ -83,11 +86,17 @@ public class MainActivity extends AppCompatActivity {
                 Glide.with(MainActivity.this)
                         .load(userProfile.getUrlProfile()).into(profileImage);
                 bio.setText("        "+userProfile.getBio());
-                post.setText("Post\n" + userProfile.getPost());
-                follower.setText("Follower\n" + userProfile.getFollower());
-                following.setText("Following\n" + userProfile.getFollowing());
+                post.setText(String.valueOf(userProfile.getPost()));
+                follower.setText(String.valueOf(userProfile.getFollower()));
+                following.setText(String.valueOf(userProfile.getFollowing()));
 
             }
         });
+    }
+
+    public void tmpSwitchUser(View view) {
+        this.pointer = (this.pointer+1)%3;
+
+        getUserProfile(user[pointer]);
     }
 }
