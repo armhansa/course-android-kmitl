@@ -6,19 +6,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.StringLoader;
 
 import kmitl.armhansa.test.app.lazyinstagram.R;
-import kmitl.armhansa.test.app.lazyinstagram.model.Image;
+import kmitl.armhansa.test.app.lazyinstagram.model.Post;
 
 class Holder extends RecyclerView.ViewHolder {
 
-    public ImageView image;
+    public ImageView post;
+    public TextView like;
+    public TextView comment;
 
     public Holder(View itemView) {
         super(itemView);
-        image = itemView.findViewById(R.id.image);
+        post = itemView.findViewById(R.id.image);
+        like = itemView.findViewById(R.id.like);
+        comment = itemView.findViewById(R.id.comment);
     }
 }
 
@@ -30,7 +36,7 @@ public class PostAdapter extends RecyclerView.Adapter<Holder> {
         this.context = context;
     }
 
-    private Image data[];
+    private Post data[];
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -43,8 +49,13 @@ public class PostAdapter extends RecyclerView.Adapter<Holder> {
 
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-        ImageView image = holder.image;
-        Glide.with(context).load(data[position].getUrl()).into(image);
+        ImageView post = holder.post;
+        TextView like = holder.like;
+        TextView comment = holder.comment;
+
+        Glide.with(context).load(data[position].getUrl()).into(post);
+        like.setText(String.valueOf(data[position].getLike()));
+        comment.setText(String.valueOf(data[position].getComment()));
 
     }
 
@@ -53,7 +64,7 @@ public class PostAdapter extends RecyclerView.Adapter<Holder> {
         return data.length;
     }
 
-    public void setData(Image data[]) {
+    public void setData(Post data[]) {
         this.data = data;
     }
 }

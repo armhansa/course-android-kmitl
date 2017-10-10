@@ -1,6 +1,5 @@
 package kmitl.armhansa.test.app.lazyinstagram.model;
 
-import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -21,7 +20,7 @@ public class UserProfile {
     public UserProfile() {
     }
 
-    private Image posts[];
+    private Post posts[];
 
     public String getUser() {
         return user;
@@ -79,11 +78,11 @@ public class UserProfile {
         this.post = post;
     }
 
-    public Image[] getPosts() {
+    public Post[] getPosts() {
         return posts;
     }
 
-    public void setPosts(Image[] posts) {
+    public void setPosts(Post[] posts) {
         this.posts = posts;
     }
 

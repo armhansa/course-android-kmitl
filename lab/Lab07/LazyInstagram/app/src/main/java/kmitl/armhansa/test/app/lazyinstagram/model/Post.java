@@ -1,6 +1,6 @@
 package kmitl.armhansa.test.app.lazyinstagram.model;
 
-public class Image {
+public class Post {
     private int comment;
     private int like;
     private String url;
