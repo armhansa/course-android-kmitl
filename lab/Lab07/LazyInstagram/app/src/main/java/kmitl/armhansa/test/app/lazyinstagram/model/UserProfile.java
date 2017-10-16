@@ -86,11 +86,4 @@ public class UserProfile {
         this.posts = posts;
     }
 
-    public void toImagePosts(MainActivity mainActivity) {
-        PostAdapter postAdapter = new PostAdapter(mainActivity);
-        postAdapter.setData(posts);
-        RecyclerView recyclerView = mainActivity.findViewById(R.id.list);
-        recyclerView.setLayoutManager(new GridLayoutManager(mainActivity, 3));
-        recyclerView.setAdapter(postAdapter);
-    }
 }

@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:weightSum="4"
-    android:orientation="vertical"
     tools:context="kmitl.armhansa.test.app.lazyinstagram.MainActivity">
 
-    <android.support.constraint.ConstraintLayout
+    <fragment
+        android:id="@+id/fragmentSwitchUser"
+        android:name="kmitl.armhansa.test.app.lazyinstagram.SwitchUserFragment"
+        android:layout_width="100dp"
+        android:layout_height="100dp">
+    </fragment>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:weightSum="4"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="363dp"
-            android:layout_height="140dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:weightSum="7"
             android:background="#EEEEEE"
             tools:layout_constraintTop_creator="1"
@@ -40,21 +47,37 @@
                 android:weightSum="6"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/txtUsername"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:text="   username"
                     android:layout_weight="1.2"
-                    android:layout_gravity="center_vertical"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:weightSum="8">
+
+                    <TextView
+                        android:id="@+id/txtUsername"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="7"
+                        android:text="   username   "
+                        android:layout_gravity="center_vertical"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton"
+                        android:onClick="selectUser"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:srcCompat="@android:drawable/arrow_down_float" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="2"
-                    android:weightSum="3">
+                    android:weightSum="4">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -137,6 +160,16 @@
 
                     </LinearLayout>
 
+                    <Button
+                        android:id="@+id/btnFollow"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:background="#55CC55"
+                        android:text="Follow"
+                        android:textSize="13sp"
+                        android:textColor="#FFFFFF" />
+
                 </LinearLayout>
 
                 <ScrollView
@@ -153,6 +186,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="        -"/>
+
                     </LinearLayout>
 
                 </ScrollView>
@@ -161,28 +195,41 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnFollow"
-            android:onClick="tmpSwitchUser"
-            android:layout_width="60dp"
-            android:layout_height="40dp"
-            android:background="#55CC55"
-            android:text="Follow"
-            android:textSize="13sp"
-            android:textColor="#FFFFFF"
-            tools:layout_constraintBottom_creator="1"
-            android:layout_marginStart="295dp"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-            tools:layout_constraintLeft_creator="1"
-            android:layout_marginBottom="9dp"
-            app:layout_constraintLeft_toLeftOf="parent" />
 
-    </android.support.constraint.ConstraintLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:weightSum="2">
 
-</LinearLayout>
+            <ImageButton
+                android:id="@+id/toGrid"
+                android:onClick="switchView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@android:drawable/ic_dialog_dialer" />
+
+            <ImageButton
+                android:id="@+id/toList"
+                android:onClick="switchView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.7"/>
+
+    </LinearLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>

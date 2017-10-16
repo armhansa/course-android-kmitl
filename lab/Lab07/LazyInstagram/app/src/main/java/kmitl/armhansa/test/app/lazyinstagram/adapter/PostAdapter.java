@@ -31,9 +31,11 @@ class Holder extends RecyclerView.ViewHolder {
 public class PostAdapter extends RecyclerView.Adapter<Holder> {
 
     private Context context;
+    private boolean isGrid;
 
-    public PostAdapter(Context context) {
+    public PostAdapter(Context context, boolean isGrid) {
         this.context = context;
+        this.isGrid = isGrid;
     }
 
     private Post data[];
@@ -41,7 +43,9 @@ public class PostAdapter extends RecyclerView.Adapter<Holder> {
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.post_item, null, false);
+        View itemView;
+        if(isGrid) itemView = inflater.inflate(R.layout.post_item, null, false);
+        else itemView = inflater.inflate(R.layout.post_item_list, null, false);
         Holder holder = new Holder(itemView);
 
         return holder;
