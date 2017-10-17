@@ -6,13 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="kmitl.armhansa.test.app.lazyinstagram.MainActivity">
 
-    <fragment
-        android:id="@+id/fragmentSwitchUser"
-        android:name="kmitl.armhansa.test.app.lazyinstagram.SwitchUserFragment"
-        android:layout_width="100dp"
-        android:layout_height="100dp">
-    </fragment>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,6 +29,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 app:srcCompat="@mipmap/ic_launcher"
+                android:padding="5dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
                 android:layout_weight="2" />
@@ -63,13 +57,11 @@
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
-                    <ImageButton
-                        android:id="@+id/imageButton"
-                        android:onClick="selectUser"
+                    <Spinner
+                        android:id="@+id/spinner"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        app:srcCompat="@android:drawable/arrow_down_float" />
+                        android:layout_weight="1" />
 
                 </LinearLayout>
 
@@ -175,7 +167,8 @@
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="2.8">
+                    android:layout_weight="2.8"
+                    android:paddingTop="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -183,9 +176,10 @@
                         android:orientation="vertical" >
                         <TextView
                             android:id="@+id/txtBio"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="        -"/>
+                            android:text="        -"
+                            android:textSize="16sp"/>
 
                     </LinearLayout>
 
@@ -229,7 +223,6 @@
             android:layout_weight="2.7"/>
 
     </LinearLayout>
-
 
 
 </android.support.constraint.ConstraintLayout>

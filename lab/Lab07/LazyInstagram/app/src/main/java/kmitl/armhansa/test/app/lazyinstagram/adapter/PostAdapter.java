@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.StringLoader;
 
 import kmitl.armhansa.test.app.lazyinstagram.R;
 import kmitl.armhansa.test.app.lazyinstagram.model.Post;
@@ -44,7 +43,7 @@ public class PostAdapter extends RecyclerView.Adapter<Holder> {
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView;
-        if(isGrid) itemView = inflater.inflate(R.layout.post_item, null, false);
+        if(isGrid) itemView = inflater.inflate(R.layout.post_item_grid, null, false);
         else itemView = inflater.inflate(R.layout.post_item_list, null, false);
         Holder holder = new Holder(itemView);
 

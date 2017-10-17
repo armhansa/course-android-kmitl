@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private int pointer = 0;
     private boolean isGrid;
     private ImageButton gridView, listView;
+    private InstagramApi instagramApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         isGrid = true;
+        getConnection();
         getUserProfile(user[pointer]);
 
         gridView = findViewById(R.id.toGrid);
@@ -51,14 +53,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void selectUser(View view) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .add(R.id.fragmentSwitchUser, new SwitchUserFragment())
-                .commit();
 
     }
 
-    public void switchUser(String username) {
+    public void switchUser(View view) {
         this.pointer = (this.pointer+1)%3;
 
         getUserProfile(user[pointer]);
@@ -72,9 +70,7 @@ public class MainActivity extends AppCompatActivity {
         getUserProfile(user[pointer]);
     }
 
-
-
-    private void getUserProfile(final String username) {
+    private void getConnection() {
         OkHttpClient client = new OkHttpClient
                 .Builder()
                 .build();
@@ -85,8 +81,12 @@ public class MainActivity extends AppCompatActivity {
                 .baseUrl(InstagramApi.BASE)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        InstagramApi instagramApi =
+        instagramApi =
                 retrofit.create(InstagramApi.class);
+    }
+
+    private void getUserProfile(final String username) {
+
         Call<UserProfile> call = instagramApi.getProfile(username);
         call.enqueue(new Callback<UserProfile>() {
             private TextView user;

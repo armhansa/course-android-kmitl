@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:padding="1dp">
 
     <ImageView
         android:id="@+id/image"
@@ -25,7 +26,7 @@
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:weightSum="2"
-        android:background="#50cecece"
+        android:background="#87777777"
         android:id="@+id/linearLayout2"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
@@ -43,33 +44,35 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 app:srcCompat="@drawable/like"
                 android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/like"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="-"
+                android:textColor="#FFFFFF"
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:gravity="center"/>
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/comment" />
 
             <TextView
                 android:id="@+id/comment"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text=" - "
+                android:textColor="#FFFFFF"
                 android:textStyle="bold"
                 android:gravity="center" />
 
