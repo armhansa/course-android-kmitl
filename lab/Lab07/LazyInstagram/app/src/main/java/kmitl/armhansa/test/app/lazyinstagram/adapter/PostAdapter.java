@@ -56,9 +56,9 @@ public class PostAdapter extends RecyclerView.Adapter<Holder> {
         TextView like = holder.like;
         TextView comment = holder.comment;
 
-        Glide.with(context).load(data[position].getUrl()).into(post);
-        like.setText(String.valueOf(data[position].getLike()));
-        comment.setText(String.valueOf(data[position].getComment()));
+        Glide.with(context).load(data[data.length-position-1].getUrl()).into(post);
+        like.setText(String.valueOf(data[data.length-position-1].getLike()));
+        comment.setText(String.valueOf(data[data.length-position-1].getComment()));
 
     }
 
