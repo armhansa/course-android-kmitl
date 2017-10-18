@@ -37,12 +37,12 @@ public class MainActivity extends AppCompatActivity {
 
     private UserProfile userProfile;
     private String username[] = {"cartoon", "nature"};
+    private String nowUsername;
     private boolean isGrid;
     private ImageButton gridView, listView;
     private Button btnFollow;
     private InstagramApi instagramApi;
 
-    private Spinner spinner;
     private TextView user, bio, post, following, follower;
     private ImageView profileImage;
 
@@ -51,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        nowUsername = "android";
         isGrid = true;
         setView();
+        gridView.setEnabled(false);
         getConnection();
-        getUserProfile("android");
-
-
+        getUserProfile(nowUsername);
 
     }
 
@@ -101,9 +101,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String selected = username[i];
-                username[i] = userProfile.getUser();
-                userProfile.setUser(selected);
-                getUserProfile(userProfile.getUser());
+                username[i] = nowUsername;
+                nowUsername = selected;
+                getUserProfile(nowUsername);
             }
         });
         builder.create();
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         gridView.setEnabled(!isGrid);
         listView.setEnabled(isGrid);
 
-        if(userProfile != null) getUserProfile(userProfile.getUser());
+        getUserProfile(nowUsername);
     }
 
     private void getConnection() {
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
                 if(response.isSuccessful()) {
                     userProfile = response.body();
-                    setIntoView();
+                    changeView();
                     toImagePosts(userProfile.getPosts());
 
                 }
@@ -178,11 +178,10 @@ public class MainActivity extends AppCompatActivity {
         btnFollow = findViewById(R.id.btnFollow);
 
         gridView = findViewById(R.id.toGrid);
-        gridView.setEnabled(false);
         listView = findViewById(R.id.toList);
     }
 
-    private void setIntoView() {
+    private void changeView() {
         user.setText("   "+userProfile.getUser());
         Glide.with(MainActivity.this)
                 .load(userProfile.getUrlProfile()).into(profileImage);
