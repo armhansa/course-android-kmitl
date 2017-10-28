@@ -33,166 +33,140 @@ import static org.hamcrest.Matchers.allOf;
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
 
+    ViewInteraction name = onView(withId(R.id.editTExtName));
+    ViewInteraction age = onView(withId(R.id.editTextAge));
+    ViewInteraction added = onView(withId(R.id.buttonAdded));
+    ViewInteraction goToList = onView(withId(R.id.buttonGotoList));
+
+
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
+    public static RecyclerViewMatcher withRecyclerView(final int recyclerViewId) {
+        return new RecyclerViewMatcher(recyclerViewId);
+    }
+
     @Test
     public void mainActivityTest1() {
-        onView(allOf(withId(R.id.buttonAdded), withText("ADDED"))).perform(click());
-
+        SystemClock.sleep(1000);
+        added.perform(click());
+        checkFeedback("Please Enter user info");
         SystemClock.sleep(5000);
-
         pressBack();
     }
 
     @Test
     public void mainActivityTest2() {
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.editTextAge), isDisplayed()));
-        appCompatEditText.perform(replaceText("20"), closeSoftKeyboard());
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.buttonAdded), withText("ADDED"), isDisplayed()));
-        appCompatButton.perform(click());
-
+        SystemClock.sleep(1000);
+        age.perform(replaceText("20"), closeSoftKeyboard());
+        SystemClock.sleep(1000);
+        added.perform(click());
+        checkFeedback("Please Enter user info");
         SystemClock.sleep(5000);
         pressBack();
     }
 
     @Test
     public void mainActivityTest3() {
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.buttonGotoList), withText("GO TO LIST"), isDisplayed()));
-        appCompatButton.perform(click());
-
+        SystemClock.sleep(1000);
+        goToList.perform(click());
+        checkFeedback("Not Found");
         SystemClock.sleep(5000);
         pressBack();
     }
 
     @Test
     public void mainActivityTest4() {
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.editTExtName), isDisplayed()));
-        appCompatEditText.perform(replaceText("Ying"), closeSoftKeyboard());
-
-        pressBack();
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.buttonAdded), withText("ADDED"), isDisplayed()));
-        appCompatButton.perform(click());
-
+        SystemClock.sleep(1000);
+        name.perform(replaceText("Ying"), closeSoftKeyboard());
+        SystemClock.sleep(1000);
+        added.perform(click());
+        checkFeedback("Please Enter user info");
         SystemClock.sleep(5000);
         pressBack();
     }
 
     @Test
     public void mainActivityTest5() {
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.editTExtName), isDisplayed()));
-        appCompatEditText.perform(replaceText("Ying"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.editTextAge), isDisplayed()));
-        appCompatEditText2.perform(replaceText("20"), closeSoftKeyboard());
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.buttonAdded), withText("ADDED"), isDisplayed()));
-        appCompatButton.perform(click());
-
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.buttonGotoList), withText("GO TO LIST"), isDisplayed()));
-        appCompatButton2.perform(click());
-
+        SystemClock.sleep(1000);
+        name.perform(replaceText("Ying"), closeSoftKeyboard());
+        SystemClock.sleep(1000);
+        age.perform(replaceText("20"), closeSoftKeyboard());
+        SystemClock.sleep(1000);
+        added.perform(click());
+        SystemClock.sleep(1000);
+        goToList.perform(click());
+        checkList(0, "Ying");
         SystemClock.sleep(5000);
         pressBack();
     }
 
     @Test
     public void mainActivityTest6() {
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.editTExtName), isDisplayed()));
-        appCompatEditText.perform(replaceText("Ladarat"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.editTextAge), isDisplayed()));
-        appCompatEditText2.perform(replaceText("20"), closeSoftKeyboard());
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.buttonAdded), withText("ADDED"), isDisplayed()));
-        appCompatButton.perform(click());
-
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.buttonGotoList), withText("GO TO LIST"), isDisplayed()));
-        appCompatButton2.perform(click());
-
+        SystemClock.sleep(1000);
+        name.perform(replaceText("Ladarat"), closeSoftKeyboard());
+        SystemClock.sleep(1000);
+        age.perform(replaceText("20"), closeSoftKeyboard());
+        SystemClock.sleep(1000);
+        added.perform(click());
+        SystemClock.sleep(1000);
+        goToList.perform(click());
+        checkList(1, "Ladarat");
         SystemClock.sleep(5000);
         pressBack();
     }
 
     @Test
     public void mainActivityTest7() {
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.editTExtName), isDisplayed()));
-        appCompatEditText.perform(replaceText("Somkait"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.editTextAge), isDisplayed()));
-        appCompatEditText2.perform(replaceText("80"), closeSoftKeyboard());
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.buttonAdded), withText("ADDED"), isDisplayed()));
-        appCompatButton.perform(click());
-
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.buttonGotoList), withText("GO TO LIST"), isDisplayed()));
-        appCompatButton2.perform(click());
-
+        SystemClock.sleep(1000);
+        name.perform(replaceText("Somkait"), closeSoftKeyboard());
+        SystemClock.sleep(1000);
+        age.perform(replaceText("80"), closeSoftKeyboard());
+        SystemClock.sleep(1000);
+        added.perform(click());
+        SystemClock.sleep(1000);
+        goToList.perform(click());
+        checkList(2, "Somkait");
         SystemClock.sleep(5000);
         pressBack();
     }
 
     @Test
     public void mainActivityTest8() {
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.editTExtName), isDisplayed()));
-        appCompatEditText.perform(replaceText("Prayoch"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.editTextAge), isDisplayed()));
-        appCompatEditText2.perform(replaceText("60"), closeSoftKeyboard());
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.buttonAdded), withText("ADDED"), isDisplayed()));
-        appCompatButton.perform(click());
-
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.buttonGotoList), withText("GO TO LIST"), isDisplayed()));
-        appCompatButton2.perform(click());
-
+        SystemClock.sleep(1000);
+        name.perform(replaceText("Prayoch"), closeSoftKeyboard());
+        SystemClock.sleep(1000);
+        age.perform(replaceText("60"), closeSoftKeyboard());
+        SystemClock.sleep(1000);
+        added.perform(click());
+        SystemClock.sleep(1000);
+        goToList.perform(click());
+        checkList(3, "Prayoch");
         SystemClock.sleep(5000);
         pressBack();
     }
 
     @Test
     public void mainActivityTest9() {
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.editTExtName), isDisplayed()));
-        appCompatEditText.perform(replaceText("Prayoch"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.editTextAge), isDisplayed()));
-        appCompatEditText2.perform(replaceText("50"), closeSoftKeyboard());
-
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.buttonAdded), withText("ADDED"), isDisplayed()));
-        appCompatButton.perform(click());
-
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.buttonGotoList), withText("GO TO LIST"), isDisplayed()));
-        appCompatButton2.perform(click());
+        SystemClock.sleep(1000);
+        name.perform(replaceText("Prayoch"), closeSoftKeyboard());
+        SystemClock.sleep(1000);
+        age.perform(replaceText("50"), closeSoftKeyboard());
+        SystemClock.sleep(1000);
+        added.perform(click());
+        SystemClock.sleep(1000);
+        goToList.perform(click());
 
         SystemClock.sleep(5000);
         pressBack();
+    }
+
+    private void checkFeedback(String keyWord) {
+        onView(withText(keyWord)).check(matches(isDisplayed()));
+    }
+
+    private void checkList(int position, String name) {
+        onView(withRecyclerView(R.id.list).atPositionOnView(position, R.id.textName)).check(matches(withText(name)));
     }
 
 }
