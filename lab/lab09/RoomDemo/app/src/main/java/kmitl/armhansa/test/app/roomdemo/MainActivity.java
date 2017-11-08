@@ -57,7 +57,7 @@ implements View.OnClickListener{
                 messageInfo.setTime(new Date().toString());
 
                 messageDB.getMessageInfoDAO().insert(messageInfo);
-                
+
                 List<MessageInfo> result = messageDB.getMessageInfoDAO().findAll();
 
                 return result;
@@ -67,7 +67,7 @@ implements View.OnClickListener{
             protected void onPostExecute(List<MessageInfo> messageInfos) {
                 super.onPostExecute(messageInfos);
 
-                ArrayAdapter<MessageInfo> adapter = new ArrayAdapter<MessageInfo>(MainActivity.this
+                ArrayAdapter<MessageInfo> adapter = new ArrayAdapter<>(MainActivity.this
                 , android.R.layout.simple_list_item_1, messageInfos);
 
                 ListView listView = findViewById(R.id.list);
