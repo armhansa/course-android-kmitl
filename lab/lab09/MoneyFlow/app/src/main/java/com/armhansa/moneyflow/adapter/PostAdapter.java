@@ -13,6 +13,16 @@ import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<Holder> {
 
+    public interface MoneyFlowListener {
+        void onClickInItem(int position);
+    }
+
+    private MoneyFlowListener listener;
+
+    public void setListener(MoneyFlowListener listener) {
+        this.listener = listener;
+    }
+
     private List<MoneyFlow> moneyFlow;
 
     public void setMoneyFlow(List<MoneyFlow> moneyFlow) {
@@ -22,17 +32,24 @@ public class PostAdapter extends RecyclerView.Adapter<Holder> {
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.task_item, null, false);
+        View itemView = inflater.inflate(R.layout.item_task, parent, false);
         Holder holder = new Holder(itemView);
 
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(Holder holder, int position) {
+    public void onBindViewHolder(Holder holder, final int position) {
         TextView type = holder.type;
         TextView task = holder.task;
         TextView value = holder.value;
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onClickInItem(position);
+            }
+        });
 
         if(moneyFlow.get(position).isIncome()) type.setText("+");
         else type.setText("-");
@@ -57,6 +74,7 @@ class Holder extends RecyclerView.ViewHolder {
         type = itemView.findViewById(R.id.type);
         task = itemView.findViewById(R.id.task);
         value = itemView.findViewById(R.id.value);
+
 
     }
 }

@@ -1,84 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.armhansa.moneyflow.FlowAdditionActivity"
-    tools:layout_editor_absoluteY="81dp">
-
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="addFlow"
-        android:text="เพิ่ม"
-        android:textSize="25sp"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="407dp" />
+    android:orientation="vertical"
+    android:weightSum="11"
+    android:padding="20dp"
+    tools:context="com.armhansa.moneyflow.FlowAdditionActivity">
 
     <TextView
+        android:text="@string/type"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ประเภท"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="51dp" />
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
-    <ToggleButton
-        android:id="@+id/toggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ToggleButton"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="99dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:gravity="center">
 
-    <ToggleButton
-        android:id="@+id/toggleButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ToggleButton"
-        tools:layout_editor_absoluteX="196dp"
-        tools:layout_editor_absoluteY="99dp" />
+        <Button
+            android:text="@string/income"
+            android:textSize="17sp"
+            android:id="@+id/incomeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="switchType" />
+
+        <Button
+            android:text="@string/outcome"
+            android:textSize="17sp"
+            android:id="@+id/outcomeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="switchType" />
+
+    </LinearLayout>
 
     <TextView
+        android:text="@string/list"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:id="@+id/textView2"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <EditText
+        android:id="@+id/task"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="รายการ"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="170dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:layout_gravity="center"
+        android:ems="12"
+        android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="จำนวนเงิน"
+        android:text="@string/amount"
         android:textSize="20sp"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="289dp" />
+        android:textStyle="bold"
+        android:id="@+id/textView3"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/value"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="209dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:layout_gravity="center"
+        android:ems="12"
+        android:inputType="numberDecimal" />
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="322dp" />
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/addBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="addFlow"
+            android:text="@string/add"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/deleteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="deleteFlow"
+            android:text="ลบ"
+            android:textSize="22sp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</LinearLayout>
