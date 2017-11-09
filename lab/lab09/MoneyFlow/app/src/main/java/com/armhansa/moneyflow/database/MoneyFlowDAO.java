@@ -9,7 +9,7 @@ import com.armhansa.moneyflow.model.MoneyFlow;
 import java.util.List;
 
 @Dao
-interface MoneyFlowDAO {
+public interface MoneyFlowDAO {
     @Insert
     void insert(MoneyFlow moneyFlow);
 

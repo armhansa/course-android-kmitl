@@ -1,7 +1,6 @@
 package com.armhansa.moneyflow.old;
 
 import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
@@ -16,6 +15,4 @@ public interface MessageInfoDAO {
     @Query("SELECT * FROM MESSAGE_INFO")
     List<MessageInfo> findAll();
 
-    @Delete
-    void clear();
 }
