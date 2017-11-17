@@ -37,7 +37,7 @@ public class MainActivityTest {
     ViewInteraction age = onView(withId(R.id.editTextAge));
     ViewInteraction added = onView(withId(R.id.buttonAdded));
     ViewInteraction goToList = onView(withId(R.id.buttonGotoList));
-
+    ViewInteraction clearList = onView(withId(R.id.btnChearList));
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
@@ -70,6 +70,7 @@ public class MainActivityTest {
     public void mainActivityTest3() {
         SystemClock.sleep(1000);
         goToList.perform(click());
+        clearList.perform(click());
         checkFeedback("Not Found");
         SystemClock.sleep(5000);
         pressBack();

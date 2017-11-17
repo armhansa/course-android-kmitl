@@ -51,6 +51,8 @@ public class UserInfoListActivity extends AppCompatActivity {
 
     public void displaySuggestsList(List<UserInfo> suggestsList) {
         if (suggestsList.size() <= 0) {
+            suggestSearchList = new UserInfoList();
+            suggestSearchList.setUserInfoList(suggestsList);
             textNotFound.setVisibility(View.VISIBLE);
             list.setVisibility(View.GONE);
         } else {
