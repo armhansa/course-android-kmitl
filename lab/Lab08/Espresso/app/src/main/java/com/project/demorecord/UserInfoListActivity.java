@@ -45,14 +45,14 @@ public class UserInfoListActivity extends AppCompatActivity {
         if (suggestSearchList != null) {
             displaySuggestsList(suggestSearchList.getUserInfoList());
         } else {
-            displaySuggestsList(new ArrayList<UserInfo>());
+            suggestSearchList = new UserInfoList();
+            suggestSearchList.setUserInfoList(new ArrayList<UserInfo>());
+            displaySuggestsList(suggestSearchList.getUserInfoList());
         }
     }
 
     public void displaySuggestsList(List<UserInfo> suggestsList) {
         if (suggestsList.size() <= 0) {
-            suggestSearchList = new UserInfoList();
-            suggestSearchList.setUserInfoList(suggestsList);
             textNotFound.setVisibility(View.VISIBLE);
             list.setVisibility(View.GONE);
         } else {
@@ -61,15 +61,13 @@ public class UserInfoListActivity extends AppCompatActivity {
             adapter.setData(suggestsList);
             adapter.notifyDataSetChanged();
         }
-
     }
 
     @OnClick(R.id.btnChearList)
     public void clearList() {
         suggestSearchList.getUserInfoList().clear();
-        preference.save(UserInfoListActivity.EXTTRA_LIST, suggestSearchList);
+        preference.save(UserInfoListActivity.EXTTRA_LIST, null);
         displaySuggestsList(suggestSearchList.getUserInfoList());
     }
-
 
 }

@@ -6,14 +6,7 @@ import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewParent;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,14 +20,13 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
 
-    ViewInteraction name = onView(withId(R.id.editTExtName));
-    ViewInteraction age = onView(withId(R.id.editTextAge));
+    ViewInteraction nameInput = onView(withId(R.id.editTExtName));
+    ViewInteraction ageInput = onView(withId(R.id.editTextAge));
     ViewInteraction added = onView(withId(R.id.buttonAdded));
     ViewInteraction goToList = onView(withId(R.id.buttonGotoList));
     ViewInteraction clearList = onView(withId(R.id.btnChearList));
@@ -48,126 +40,139 @@ public class MainActivityTest {
 
     @Test
     public void mainActivityTest1() {
-        SystemClock.sleep(1000);
         added.perform(click());
         checkFeedback("Please Enter user info");
-        SystemClock.sleep(5000);
-        pressBack();
     }
 
     @Test
     public void mainActivityTest2() {
-        SystemClock.sleep(1000);
-        age.perform(replaceText("20"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        setAgeInput("20");
         added.perform(click());
         checkFeedback("Please Enter user info");
-        SystemClock.sleep(5000);
-        pressBack();
     }
 
     @Test
     public void mainActivityTest3() {
-        SystemClock.sleep(1000);
+        clearList();
+
         goToList.perform(click());
-        clearList.perform(click());
         checkFeedback("Not Found");
-        SystemClock.sleep(5000);
-        pressBack();
     }
 
     @Test
     public void mainActivityTest4() {
-        SystemClock.sleep(1000);
-        name.perform(replaceText("Ying"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        setNameInput("Ying");
         added.perform(click());
         checkFeedback("Please Enter user info");
-        SystemClock.sleep(5000);
-        pressBack();
     }
 
     @Test
     public void mainActivityTest5() {
-        SystemClock.sleep(1000);
-        name.perform(replaceText("Ying"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
-        age.perform(replaceText("20"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        String name = "Ying";
+        String age = "20";
+        int index = 0;
+
+        clearList();
+        for(int i=0; i<index; i++) { addRandomToList(i); }
+
+        setNameInput(name);
+        setAgeInput(age);
         added.perform(click());
-        SystemClock.sleep(1000);
         goToList.perform(click());
-        checkList(0, "Ying");
-        SystemClock.sleep(5000);
-        pressBack();
+        checkList(index, name, age);
     }
 
     @Test
     public void mainActivityTest6() {
-        SystemClock.sleep(1000);
-        name.perform(replaceText("Ladarat"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
-        age.perform(replaceText("20"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        String name = "Ladarat";
+        String age = "20";
+        int index = 1;
+
+        clearList();
+        for(int i=0; i<index; i++) { addRandomToList(i); }
+
+        setNameInput(name);
+        setAgeInput(age);
         added.perform(click());
-        SystemClock.sleep(1000);
         goToList.perform(click());
-        checkList(1, "Ladarat");
-        SystemClock.sleep(5000);
-        pressBack();
+        checkList(index, name, age);
     }
 
     @Test
     public void mainActivityTest7() {
-        SystemClock.sleep(1000);
-        name.perform(replaceText("Somkait"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
-        age.perform(replaceText("80"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        String name = "Somkait";
+        String age = "80";
+        int index = 2;
+
+        clearList();
+        for(int i=0; i<index; i++) { addRandomToList(i); }
+
+        setNameInput(name);
+        setAgeInput(age);
         added.perform(click());
-        SystemClock.sleep(1000);
         goToList.perform(click());
-        checkList(2, "Somkait");
-        SystemClock.sleep(5000);
-        pressBack();
+        checkList(index, name, age);
     }
 
     @Test
     public void mainActivityTest8() {
-        SystemClock.sleep(1000);
-        name.perform(replaceText("Prayoch"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
-        age.perform(replaceText("60"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
+        String name = "Prayoch";
+        String age = "60";
+        int index = 3;
+
+        clearList();
+        for(int i=0; i<index; i++) { addRandomToList(i); }
+
+        setNameInput(name);
+        setAgeInput(age);
         added.perform(click());
-        SystemClock.sleep(1000);
         goToList.perform(click());
-        checkList(3, "Prayoch");
-        SystemClock.sleep(5000);
-        pressBack();
+        checkList(index, name, age);
     }
 
     @Test
     public void mainActivityTest9() {
-        SystemClock.sleep(1000);
-        name.perform(replaceText("Prayoch"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
-        age.perform(replaceText("50"), closeSoftKeyboard());
-        SystemClock.sleep(1000);
-        added.perform(click());
-        SystemClock.sleep(1000);
-        goToList.perform(click());
+        String name = "Prayoch";
+        String age = "50";
+        int index = 4;
 
-        SystemClock.sleep(5000);
+        clearList();
+        for(int i=0; i<index; i++) { addRandomToList(i); }
+
+        setNameInput(name);
+        setAgeInput(age);
+        added.perform(click());
+        goToList.perform(click());
+        checkList(index, name, age);
+    }
+
+    private void setNameInput(String name) {
+        nameInput.perform(replaceText(name), closeSoftKeyboard());
+    }
+
+    private void setAgeInput(String age) {
+        ageInput.perform(replaceText(age), closeSoftKeyboard());
+    }
+
+    private void clearList() {
+        goToList.perform(click());
+        clearList.perform(click());
         pressBack();
+    }
+
+    private void addRandomToList(int index) {
+        nameInput.perform(replaceText("Temp"), closeSoftKeyboard());
+        ageInput.perform(replaceText(String.valueOf(index)), closeSoftKeyboard());
+        added.perform(click());
     }
 
     private void checkFeedback(String keyWord) {
         onView(withText(keyWord)).check(matches(isDisplayed()));
     }
 
-    private void checkList(int position, String name) {
+    private void checkList(int position, String name, String age) {
         onView(withRecyclerView(R.id.list).atPositionOnView(position, R.id.textName)).check(matches(withText(name)));
+        onView(withRecyclerView(R.id.list).atPositionOnView(position, R.id.textAge)).check(matches(withText(age)));
     }
 
 }
